@@ -1,9 +1,8 @@
-param appName string = uniqueString(az.resourceGroup().id)
 param location string = az.resourceGroup().location
 
-var storageAccountName  = uniqueString(appName)
-var appServicePlanName = toLower('AppServicePlan-${appName}')
-var functionAppName = toLower('fapp-${appName}')
+var storageAccountName  = 'caavywjkx6mye'
+var appServicePlanName = 'appserviceplan-yg4axi7ltkheu'
+var functionAppName = 'fapp-yg4axi7ltkheu'
 
 resource appServicePlan 'Microsoft.Web/serverfarms@2020-06-01' = {
   name: appServicePlanName
