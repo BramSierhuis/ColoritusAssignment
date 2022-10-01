@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "dgSpecHash": "a0+owzVy1gn+TA3dAUFlRCFyEIFdbwrQ+Wg/3fXF2csU1lDxmhMCbvVzKdMTr18+khNYYACeYDbvMrb8kG4NHA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Bram.FD\\source\\repos\\_School\\ServerSideProgramming\\src\\Coloritus\\Coloritus.Models\\Coloritus.Models.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Bram.FD\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
+    "C:\\Users\\Bram.FD\\.nuget\\packages\\azure.data.tables\\12.6.1\\azure.data.tables.12.6.1.nupkg.sha512",
+    "C:\\Users\\Bram.FD\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
+    "C:\\Users\\Bram.FD\\.nuget\\packages\\system.diagnostics.diagnosticsource\\4.6.0\\system.diagnostics.diagnosticsource.4.6.0.nupkg.sha512",
+    "C:\\Users\\Bram.FD\\.nuget\\packages\\system.memory.data\\1.0.2\\system.memory.data.1.0.2.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
+    "C:\\Users\\Bram.FD\\.nuget\\packages\\system.text.encodings.web\\4.7.2\\system.text.encodings.web.4.7.2.nupkg.sha512",
+    "C:\\Users\\Bram.FD\\.nuget\\packages\\system.text.json\\4.7.2\\system.text.json.4.7.2.nupkg.sha512",
+    "C:\\Users\\Bram.FD\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512"
+  ],
+  "logs": []
+}

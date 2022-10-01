@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coloritus", "Coloritus\Coloritus.csproj", "{1669BF28-D640-44A8-B3F8-37D3D841893B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coloritus.Models", "Coloritus.Models\Coloritus.Models.csproj", "{DC201BE8-1836-47E5-B335-B0E971DAC9C8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1669BF28-D640-44A8-B3F8-37D3D841893B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1669BF28-D640-44A8-B3F8-37D3D841893B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1669BF28-D640-44A8-B3F8-37D3D841893B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1669BF28-D640-44A8-B3F8-37D3D841893B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC201BE8-1836-47E5-B335-B0E971DAC9C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC201BE8-1836-47E5-B335-B0E971DAC9C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC201BE8-1836-47E5-B335-B0E971DAC9C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC201BE8-1836-47E5-B335-B0E971DAC9C8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
