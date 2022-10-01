@@ -27,7 +27,7 @@ public class ImageController
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/plain", bodyType: typeof(string), Description = "The OK response")]
     [OpenApiRequestBody(contentType: "multipart/form-data", bodyType: typeof(UploadImageRequest), Required = true, Description = "Image data")]
     public async Task<IActionResult> RunAsync(
-        [HttpTrigger(AuthorizationLevel.Function, "post", Route = "images")] HttpRequest req, ILogger log)
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "images")] HttpRequest req, ILogger log)
     {
         var file = req.Form.Files["File"];
 
