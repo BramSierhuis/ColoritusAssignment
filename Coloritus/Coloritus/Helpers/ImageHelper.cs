@@ -87,7 +87,8 @@ public static class ImageHelper
             {
                 foreach (var (text, (x, y), fontSize, colorHex) in texts)
                 {
-                    var font = SystemFonts.CreateFont("Verdana", fontSize);
+                    var family = SystemFonts.Collection.Families.First();
+                    var font = new Font(family, fontSize);
                     var color = Rgba32.ParseHex(colorHex);
 
                     img.DrawText(text, font, color, new PointF(x, y));
