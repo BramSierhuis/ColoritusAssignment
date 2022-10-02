@@ -1,11 +1,19 @@
 param location string = az.resourceGroup().location
 
-var storageAccountName  = 'caavywjkx6mye'
-var appServicePlanName = 'appserviceplan-yg4axi7ltkheu'
-var functionAppName = 'fapp-yg4axi7ltkheu'
+param prefix string
+param initialuploadqueueName string = 'initialuploadqueue'
+param primaryeditqueueName string = 'primaryeditqueue'
+param initialcontainerName string = 'initialcontainer'
+param finalcontainerName string = 'finalcontainer'
+param primaryeditcontainerName string = 'primaryeditcontainer'
+param imageTableName string = 'ImageRecord'
 
-resource appServicePlan 'Microsoft.Web/serverfarms@2020-06-01' = {
-  name: appServicePlanName
+var storageAccountName = replace(toLower('${prefix}-SA-1'), '-', '')
+var functionAppName = '${prefix}-FA-1'
+var serverFarmName = '${prefix}-ASP-1'
+
+resource serverFarm 'Microsoft.Web/serverfarms@2022-03-01' = {
+  name: serverFarmName
   location: location
   properties: {
     reserved: true
@@ -20,16 +28,16 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2020-06-01' = {
   kind: 'app'
 }
 
-resource appService 'Microsoft.Web/sites@2020-06-01' = {
+resource appService 'Microsoft.Web/sites@2022-03-01' = {
   name: functionAppName
   location: location
   kind: 'functionapp'
   properties: {
-    serverFarmId: appServicePlan.id
+    serverFarmId: resourceId('Microsoft.Web/serverfarms', serverFarm.name)
   }
 }
 
-resource storageaccount 'Microsoft.Storage/storageAccounts@2021-02-01' = {
+resource storageaccount 'Microsoft.Storage/storageAccounts@2022-05-01' = {
   name: storageAccountName
   location: location
   kind: 'StorageV2'
@@ -42,11 +50,11 @@ resource storageaccount 'Microsoft.Storage/storageAccounts@2021-02-01' = {
     name: 'default'
 
     resource initialuploadqueue 'queues' = {
-      name: 'initialuploadqueue'
+      name: initialuploadqueueName
     }
 
     resource primaryeditqueue 'queues' = {
-      name: 'primaryeditqueue'
+      name: primaryeditqueueName
     }
   }
   
@@ -55,15 +63,23 @@ resource storageaccount 'Microsoft.Storage/storageAccounts@2021-02-01' = {
     name: 'default'
 
     resource initialcontainer 'containers' = {
-      name: 'initialcontainer'
+      name: initialcontainerName
     }
 
     resource primaryeditcontainer 'containers' = {
-      name: 'primaryeditcontainer'
+      name: primaryeditcontainerName
     }
 
     resource finalcontainer 'containers' = {
-      name: 'finalcontainer'
+      name: finalcontainerName
+    }
+  }
+
+  resource tableService 'tableServices' = {
+    name: 'default'
+
+    resource imageTable 'tables' = {
+      name: imageTableName
     }
   }
 }
