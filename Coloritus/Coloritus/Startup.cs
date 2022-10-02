@@ -38,10 +38,10 @@ public class Startup : FunctionsStartup
         {
             clientFactoryBuilder.AddClient<InitialUploadQueueClient, QueueClientOptions>((_, _, _) 
                 => new InitialUploadQueueClient(
-                    Environment.GetEnvironmentVariable("StorageConnectionString")));
+                    Environment.GetEnvironmentVariable("AzureWebJobsStorage")));
             clientFactoryBuilder.AddClient<PrimaryEditQueueClient, QueueClientOptions>((_, _, _) 
                 => new PrimaryEditQueueClient(
-                    Environment.GetEnvironmentVariable("StorageConnectionString")));
+                    Environment.GetEnvironmentVariable("AzureWebJobsStorage")));
         });
 
         builder.Services.AddScoped<IImageRepository, ImageRepository>();

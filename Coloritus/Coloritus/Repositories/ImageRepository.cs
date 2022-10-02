@@ -13,7 +13,7 @@ public class ImageRepository : IImageRepository
 {
     public async Task AddAsync(string containerName, byte[] image, string fileName)
     {
-        var connection = Environment.GetEnvironmentVariable("StorageConnectionString");
+        var connection = Environment.GetEnvironmentVariable("AzureWebJobsStorage");
         
         var blobContainerClient = new BlobContainerClient(connection, containerName);
         var blobClient = blobContainerClient.GetBlobClient(fileName);
@@ -24,7 +24,7 @@ public class ImageRepository : IImageRepository
     
     public async Task<byte[]> GetAsync(string containerName, string fileName)
     {
-        var connection = Environment.GetEnvironmentVariable("StorageConnectionString");
+        var connection = Environment.GetEnvironmentVariable("AzureWebJobsStorage");
         
         var blobContainerClient = new BlobContainerClient(connection, containerName);
         var blobClient = blobContainerClient.GetBlobClient(fileName);
@@ -36,7 +36,7 @@ public class ImageRepository : IImageRepository
     
     public Uri GetUri(string containerName, string fileName)
     {
-        var connection = Environment.GetEnvironmentVariable("StorageConnectionString");
+        var connection = Environment.GetEnvironmentVariable("AzureWebJobsStorage");
         
         var blobContainerClient = new BlobContainerClient(connection, containerName);
         var blobClient = blobContainerClient.GetBlobClient(fileName);

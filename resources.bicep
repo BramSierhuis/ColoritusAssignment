@@ -1,6 +1,8 @@
 param location string = az.resourceGroup().location
 
 param prefix string
+param colorApiBaseAddress string = 'https://www.thecolorapi.com/'
+param relatedTextApiBaseAddress string = 'https://api.datamuse.com/'
 param initialuploadqueueName string = 'initialuploadqueue'
 param primaryeditqueueName string = 'primaryeditqueue'
 param initialcontainerName string = 'initialcontainer'
@@ -26,15 +28,6 @@ resource serverFarm 'Microsoft.Web/serverfarms@2022-03-01' = {
     capacity: 1
   }
   kind: 'app'
-}
-
-resource appService 'Microsoft.Web/sites@2022-03-01' = {
-  name: functionAppName
-  location: location
-  kind: 'functionapp'
-  properties: {
-    serverFarmId: resourceId('Microsoft.Web/serverfarms', serverFarm.name)
-  }
 }
 
 resource storageaccount 'Microsoft.Storage/storageAccounts@2022-05-01' = {
@@ -80,6 +73,56 @@ resource storageaccount 'Microsoft.Storage/storageAccounts@2022-05-01' = {
 
     resource imageTable 'tables' = {
       name: imageTableName
+    }
+  }
+}
+
+resource appService 'Microsoft.Web/sites@2022-03-01' = {
+  name: functionAppName
+  location: location
+  kind: 'functionapp'
+  properties: {
+    serverFarmId: resourceId('Microsoft.Web/serverfarms', serverFarm.name)
+    siteConfig: {
+      appSettings: [
+        {
+          name: 'AzureWebJobsStorage'
+          value: 'DefaultEndpointsProtocol=https;AccountName=${storageaccount.name};AccountKey=${listKeys(resourceId('Microsoft.Storage/storageAccounts', storageaccount.name), '2022-05-01').keys[0].value};EndpointSuffix=core.windows.net'
+
+        }
+        {
+          name: 'RelatedTextApiBaseAddress'
+          value: colorApiBaseAddress
+        }
+        {
+          name: 'ColorApiBaseAddress'
+          value: relatedTextApiBaseAddress
+        }
+        {
+          name: 'InitialUploadQueue'
+          value: initialuploadqueueName
+        }
+        {
+          name: 'PrimaryEditQueue'
+          value: primaryeditqueueName
+        }
+        {
+          name: 'InitialContainer'
+          value: initialcontainerName
+        }
+        {
+          name: 'FinalContainer'
+          value: finalcontainerName
+        }
+        {
+          name: 'PrimaryEditContainer'
+          value: primaryeditcontainerName
+        }
+        {
+          name: 'ImageTable'
+          value: imageTableName
+        }
+      ]
     }
   }
 }

@@ -9,12 +9,10 @@ namespace Coloritus.Repositories;
 
 public class TableStorageRepository : ITableStorageRepository
 {
-    private const string TableName = "ImageRecord";
-
     private TableClient GetTableClient()
     {
-        var serviceClient = new TableServiceClient(Environment.GetEnvironmentVariable("StorageConnectionString"));
-        var tableClient = serviceClient.GetTableClient(TableName);
+        var serviceClient = new TableServiceClient(Environment.GetEnvironmentVariable("AzureWebJobsStorage"));
+        var tableClient = serviceClient.GetTableClient(Environment.GetEnvironmentVariable("ImageTable"));
         
         return tableClient;
     }

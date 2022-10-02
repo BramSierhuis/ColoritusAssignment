@@ -39,7 +39,7 @@ public class ImageService : IImageService
             Status = Status.Unprocessed,
         };
         
-        await _imageRepository.AddAsync("initialcontainer", image, id + fileName);
+        await _imageRepository.AddAsync(Environment.GetEnvironmentVariable("InitialContainer"), image, id + fileName);
         await _tableStorageRepository.UpsertEntityAsync(entity);
         await _initialUploadQueueClient.SendMessageAsync(id);
         
@@ -49,7 +49,7 @@ public class ImageService : IImageService
     public async Task GetColorsAndEdit(string id)
     {
         var imageEntity = await _tableStorageRepository.GetEntityAsync("images", id);
-        var image = await _imageRepository.GetAsync("initialcontainer", id + imageEntity.FileName);
+        var image = await _imageRepository.GetAsync(Environment.GetEnvironmentVariable("InitialContainer"), id + imageEntity.FileName);
 
         var (editedImage, colors) = ImageHelper.EditImage(image);
         
@@ -59,7 +59,7 @@ public class ImageService : IImageService
         imageEntity.Status = Status.Edited;
         imageEntity.PrimaryColor = colors[index];
 
-        await _imageRepository.AddAsync("primaryeditcontainer", editedImage, id+imageEntity.FileName);
+        await _imageRepository.AddAsync(Environment.GetEnvironmentVariable("PrimaryEditContainer"), editedImage, id+imageEntity.FileName);
         await _tableStorageRepository.UpsertEntityAsync(imageEntity);
 
         await _primaryEditQueueClient.SendMessageAsync(id);
@@ -68,7 +68,7 @@ public class ImageService : IImageService
     public async Task GetAndAddTexts(string id)
     {
         var imageEntity = await _tableStorageRepository.GetEntityAsync("images", id);
-        var image = await _imageRepository.GetAsync("primaryeditcontainer", id + imageEntity.FileName);
+        var image = await _imageRepository.GetAsync(Environment.GetEnvironmentVariable("PrimaryEditContainer"), id + imageEntity.FileName);
         
         var colorName = await _colorApiClient.GetColorName(imageEntity.PrimaryColor);
         var relatedText = await _relatedTextClient.GetRelatedText(colorName);
@@ -79,7 +79,7 @@ public class ImageService : IImageService
         imageEntity.Status = Status.Finished;
         
         //Store new image
-        await _imageRepository.AddAsync("finalcontainer", textedImage, id + imageEntity.FileName);
+        await _imageRepository.AddAsync(Environment.GetEnvironmentVariable("FinalContainer"), textedImage, id + imageEntity.FileName);
         await _tableStorageRepository.UpsertEntityAsync(imageEntity);
     }
 
@@ -87,6 +87,6 @@ public class ImageService : IImageService
     {
         var imageEntity = await _tableStorageRepository.GetEntityAsync("images", id);
 
-        return _imageRepository.GetUri("finalcontainer", id + imageEntity.FileName);
+        return _imageRepository.GetUri(Environment.GetEnvironmentVariable("FinalContainer"), id + imageEntity.FileName);
     }
 }
