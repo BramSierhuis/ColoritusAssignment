@@ -11,7 +11,7 @@ variables:
   azureSubscription: 'b0b9ac63-fc07-4f9e-9724-13efb514e4f6'
 
   # Function app name
-  functionAppName: 'functionapp-221001145539'
+  functionAppName: 'INH-5638-FA-1'
 
   # Agent VM image name
   vmImageName: 'windows-2019'
