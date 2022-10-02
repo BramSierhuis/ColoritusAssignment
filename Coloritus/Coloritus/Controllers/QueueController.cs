@@ -15,13 +15,13 @@ public class QueueController
     }
     
     [FunctionName("InitialUploadTrigger")]
-    public async Task InitialUploadTrigger([QueueTrigger("initialuploadqueue", Connection = "StorageConnectionString")] string id, ILogger log)
+    public async Task InitialUploadTrigger([QueueTrigger("initialuploadqueue", Connection = "AzureWebJobsStorage")] string id, ILogger log)
     {
         await _imageService.GetColorsAndEdit(id);
     }
     
     [FunctionName("ImageEditedTrigger")]
-    public async Task ImageEditedTrigger([QueueTrigger("primaryeditqueue", Connection = "StorageConnectionString")] string id, ILogger log)
+    public async Task ImageEditedTrigger([QueueTrigger("primaryeditqueue", Connection = "AzureWebJobsStorage")] string id, ILogger log)
     {
         await _imageService.GetAndAddTexts(id);
     }

@@ -27,7 +27,7 @@ public class ImageController
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/plain", bodyType: typeof(string), Description = "The OK response")]
     [OpenApiRequestBody(contentType: "multipart/form-data", bodyType: typeof(UploadImageRequest), Required = true, Description = "Image data")]
     public async Task<IActionResult> RunAsync(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "images")] HttpRequest req, ILogger log)
+        [HttpTrigger(AuthorizationLevel.Function, "post", Route = "images")] HttpRequest req, ILogger log)
     {
         var file = req.Form.Files["File"];
 
@@ -40,7 +40,7 @@ public class ImageController
     [OpenApiOperation(operationId: "GetImage", tags: new[] { "Images" })]
     [OpenApiParameter(name: "id", Type = typeof(Guid), Required = true)]
     public async Task<IActionResult> GetImage(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "images/{id}")] HttpRequest req, Guid id)
+        [HttpTrigger(AuthorizationLevel.Function, "get", Route = "images/{id}")] HttpRequest req, Guid id)
     {
         var entity = await _imageService.GetImageUri(id.ToString());
         

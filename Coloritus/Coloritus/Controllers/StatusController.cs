@@ -27,7 +27,7 @@ public class StatusController
     [OpenApiParameter(name: "id", Type = typeof(Guid), Required = true)]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.Created, contentType: "application/json", bodyType: typeof(ImageRecord), Description = "User has been created")]
     public async Task<IActionResult> GetStatus(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "statuses/{id}")] HttpRequest req, Guid id)
+        [HttpTrigger(AuthorizationLevel.Function, "get", Route = "statuses/{id}")] HttpRequest req, Guid id)
     {
         var entity = await _statusService.GetStatusAsync(id.ToString());
         
