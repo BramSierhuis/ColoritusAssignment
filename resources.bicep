@@ -92,11 +92,11 @@ resource appService 'Microsoft.Web/sites@2022-03-01' = {
         }
         {
           name: 'RelatedTextApiBaseAddress'
-          value: colorApiBaseAddress
+          value: relatedTextApiBaseAddress
         }
         {
           name: 'ColorApiBaseAddress'
-          value: relatedTextApiBaseAddress
+          value: colorApiBaseAddress
         }
         {
           name: 'InitialUploadQueue'
